@@ -24,6 +24,9 @@ function NavBar() {
         <NavLink to="/signup">
             Signup
         </NavLink>
+        <NavLink to="/profile">
+            Profile
+        </NavLink>
     </nav>
     )
 }
