@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useContext } from "react";
 import UserContext from "./userContext";
 
-
 /**
  * Profile Form, all fields editable except for username
  * 
@@ -31,18 +30,15 @@ function ProfileForm({ handleUpdate }) {
       interests: "",
       friendradius: 0,
       password: "",
+      image_url: "",
   });
-
-  //console.log("PROFILE FORM", currentUser)
   
   useEffect(function setFormInfo() {
-    //const currentUser = JSON.parse(localStorage.getItem("user"))
     if (currentUser) {
     setFormValues({...currentUser, password:""})
     }
   }, [currentUser]);
 
-  // if (currentUser) {setFormValues({...currentUser})}
 
   function submitForm(evt) {
     evt.preventDefault();
@@ -63,6 +59,7 @@ function ProfileForm({ handleUpdate }) {
 
   return (
     <div>
+      <img src={currentUser?.image_url} alt="proflie"></img>
       <form onSubmit={submitForm}>
         <label htmlFor="username">Username:</label>
         <input
@@ -141,6 +138,15 @@ function ProfileForm({ handleUpdate }) {
           id="password"
           name="password"
           value={formValues.password}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <label htmlFor="image_url">Image URL:</label>
+        <input
+          id="image_url"
+          name="image_url"
+          value={formValues.image_url}
           onChange={handleChange}
           required
         />
