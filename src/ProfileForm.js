@@ -57,6 +57,10 @@ function ProfileForm({ handleUpdate }) {
     }));
   }
 
+  function imgUpload(){
+
+  }
+
   return (
     <div>
       <img src={currentUser?.image_url} alt="proflie"></img>
@@ -151,7 +155,13 @@ function ProfileForm({ handleUpdate }) {
           required
         />
         <button>Save Changes!</button>
+        <br />
+        <br />
+        <br />
+        
       </form>
+      <input type="file" id="uploadprofileimg" />
+      <button id="uploadprofileimgbtn" onClick={imgUpload}>Image Upload</button>
     </div>
   )
 }
