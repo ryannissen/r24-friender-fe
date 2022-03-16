@@ -33,11 +33,14 @@ function ProfileForm({ handleUpdate }) {
       password: "",
   });
 
-  console.log("PROFILE FORM", currentUser)
-
+  //console.log("PROFILE FORM", currentUser)
+  
   useEffect(function setFormInfo() {
-    setFormValues({...currentUser})
-  }, []);
+    //const currentUser = JSON.parse(localStorage.getItem("user"))
+    if (currentUser) {
+    setFormValues({...currentUser, password:""})
+    }
+  }, [currentUser]);
 
   // if (currentUser) {setFormValues({...currentUser})}
 
