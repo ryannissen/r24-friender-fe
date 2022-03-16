@@ -15,6 +15,7 @@ import UserContext from "./userContext";
  */
 function HomePage() {
     const { currentUser } = useContext(UserContext);
+    console.log("HOMEPAGE CURRENTUSER", currentUser);
 
     return (
         <>

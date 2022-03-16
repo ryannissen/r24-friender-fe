@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import UserContext from "./userContext";
@@ -18,21 +18,28 @@ import UserContext from "./userContext";
  */
 
 function ProfileForm({ handleUpdate }) {
-  console.log("ProfileForm rendered");
 
   const { currentUser } = useContext(UserContext);
 
   const [formValues, setFormValues] = useState({
-      username: currentUser.username,
-      firstname: currentUser.firstname,
-      lastname: currentUser.lastname,
-      email: currentUser.email,
-      location: currentUser.location || "",
-      hobbies: currentUser.hobbies || "",
-      interests: currentUser.interests || "",
-      friendradius: currentUser.friendradius || 0,
-      password: ""
+      username: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      location: "",
+      hobbies: "",
+      interests: "",
+      friendradius: 0,
+      password: "",
   });
+
+  console.log("PROFILE FORM", currentUser)
+
+  useEffect(function setFormInfo() {
+    setFormValues({...currentUser})
+  }, []);
+
+  // if (currentUser) {setFormValues({...currentUser})}
 
   function submitForm(evt) {
     evt.preventDefault();
@@ -125,7 +132,6 @@ function ProfileForm({ handleUpdate }) {
           onChange={handleChange}
           required
         />
-        <br />
         <br />
         <label htmlFor="password">Password:</label>
         <input

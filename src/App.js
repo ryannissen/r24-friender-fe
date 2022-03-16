@@ -32,7 +32,7 @@ function App() {
 
   async function updateUser(user) {
     const profileUser = await FrienderApi.updateUser(user);
-    console.log("Updating user profile");
+    console.log("Updating user profile", profileUser);
     localStorage.setItem("user", JSON.stringify(profileUser));
     setCurrentUser(profileUser);
   }
