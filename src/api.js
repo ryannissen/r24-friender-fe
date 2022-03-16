@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5001"
-//const BASE_URL="http://localhost:5000"
+// const BASE_URL = "http://localhost:5001";
+const BASE_URL="http://localhost:5000";
 
 /** API Class.
  *
@@ -16,21 +16,26 @@ class FrienderApi {
     //Look at refactoring to request function
     //to reduce repeated axios calls
 
+    /** Calls backend to signup new user */
     static async signupUser(user) {
-        console.log('user in api.js signup', user);
         try {
-        let res = await axios.post(`${BASE_URL}/signup`,
-        user,
-        { headers: {
-            'content-type': 'application/json',
-            "Access-Control-Allow-Origin": "*"
-        }});
-        return res.data.user;
+            const res = await axios.post(`${BASE_URL}/signup`, user,);
+            return res.data.user;
         } catch (err) {
-        console.log('err', err);
+            return err;
         }
-        
     }
+
+    /** Calls backend to login user */
+    static async loginUser(user) {
+        try {
+            const res = await axios.post(`${BASE_URL}/login`, user);
+            return res.data.user;
+        } catch (err) {
+            return err;
+        }
+    }
+
 }
 
 export default FrienderApi;

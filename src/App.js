@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter } from "react-router-dom";
 import NavBar from './NavBar';
-import HomePage from './HomePage';
 import RoutesComp from './RoutesComp';
 import FrienderApi from './api';
 import UserContext from './userContext';
@@ -11,19 +10,37 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
 
+  useEffect(function fetchUserOnFirstLoad() {
+    console.log("WHATS IN LOCAL STORAGE", localStorage.getItem("user"))
+    if(localStorage.getItem("user")){
+      setCurrentUser(JSON.parse(localStorage.getItem("user")));
+    }
+  }, []);
+
   async function signupUser(user) {
-    console.log('user in signUp user in App comp', user);
     const newUser = await FrienderApi.signupUser(user);
-    console.log('success, newUser: ', newUser);
+    localStorage.setItem("user", JSON.stringify(newUser));
     setCurrentUser(newUser);
+  }
+
+  async function loginUser(user) {
+    const loggedInUser = await FrienderApi.loginUser(user);
+    console.log("LOGGED IN", loggedInUser);
+    localStorage.setItem("user", JSON.stringify(loggedInUser));
+    setCurrentUser(loggedInUser);
+  }
+
+  function logoutUser() {
+    localStorage.removeItem("user");
+    setCurrentUser(null);
   }
 
   return (
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider value={{ currentUser }}>
-          <NavBar />
-          <RoutesComp handleSignup={signupUser} />
+          <NavBar handleLogout={logoutUser}/>
+          <RoutesComp handleSignup={signupUser} handleLogin={loginUser} />
         </UserContext.Provider>
       </BrowserRouter>
     </div >

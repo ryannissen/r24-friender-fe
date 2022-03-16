@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "./userContext";
 
 /**
  * NavBar component for users to navigate through the application
@@ -12,22 +14,38 @@ import { NavLink } from "react-router-dom";
  * App -> NavBar - - LI - > {Home (show cards list), Profile, LogOut}
  * App -> NavBar - - NLI - >{Home (takes you to landing page with button), Login, Signup}
  */
-function NavBar() {
+function NavBar({handleLogout}) {
+
+    const { currentUser } = useContext(UserContext);
+
     return (
-    <nav className="NavBar">
-        <NavLink to="/">
-            Home
-        </NavLink>
-        <NavLink to="/login">
-            Login
-        </NavLink>
-        <NavLink to="/signup">
-            Signup
-        </NavLink>
-        <NavLink to="/profile">
-            Profile
-        </NavLink>
-    </nav>
+        <>
+            {!currentUser &&
+                <nav className="NavBar">
+                    <NavLink to="/">
+                        Home
+                    </NavLink>
+                    <NavLink to="/login">
+                        Login
+                    </NavLink>
+                    <NavLink to="/signup">
+                        Signup
+                    </NavLink>
+                </nav>}
+
+            {currentUser &&
+                <nav className="NavBar">
+                    <NavLink to="/">
+                        Home
+                    </NavLink>
+                    <NavLink to="/profile">
+                        Profile
+                    </NavLink>
+                    <Link onClick={handleLogout} to="/">
+                        Logout {currentUser.firstname}
+                    </Link>
+                </nav>}
+        </>
     )
 }
 

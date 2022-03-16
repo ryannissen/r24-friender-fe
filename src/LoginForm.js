@@ -15,7 +15,7 @@ import { useHistory } from 'react-router-dom'
  * Routes --> LoginForm
  */
 
-function LoginForm() {
+function LoginForm({handleLogin}) {
   console.log("LoginForm rendered");
 
   //const history = useHistory();
@@ -25,16 +25,15 @@ function LoginForm() {
     password: "",
   });
 
-//   async function submitForm(evt) {
-//     evt.preventDefault();
-//     try {
-//       await handleLogin(formValues);
-//       history.push('/');
-//     } catch (err) {
-//       alert(err);
-//       //CR Set error variable/state. Show in return.
-//     }
-//   }
+  async function submitForm(evt) {
+    evt.preventDefault();
+    try {
+      await handleLogin(formValues);
+      //history.push('/');
+    } catch (err) {
+      alert(err);
+    }
+  }
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -45,7 +44,7 @@ function LoginForm() {
   }
 
   return (
-    <form>
+    <form onSubmit={submitForm}>
       <label htmlFor="username">Username:</label>
       <input
         id="username"
