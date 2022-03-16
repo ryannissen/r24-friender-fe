@@ -30,6 +30,13 @@ function App() {
     setCurrentUser(loggedInUser);
   }
 
+  async function updateUser(user) {
+    const profileUser = await FrienderApi.updateUser(user);
+    console.log("Updating user profile");
+    localStorage.setItem("user", JSON.stringify(profileUser));
+    setCurrentUser(profileUser);
+  }
+
   function logoutUser() {
     localStorage.removeItem("user");
     setCurrentUser(null);
@@ -40,7 +47,10 @@ function App() {
       <BrowserRouter>
         <UserContext.Provider value={{ currentUser }}>
           <NavBar handleLogout={logoutUser}/>
-          <RoutesComp handleSignup={signupUser} handleLogin={loginUser} />
+          <RoutesComp 
+            handleSignup={signupUser} 
+            handleLogin={loginUser}
+            handleUpdate={updateUser} />
         </UserContext.Provider>
       </BrowserRouter>
     </div >

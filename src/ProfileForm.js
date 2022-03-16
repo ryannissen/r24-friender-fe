@@ -17,29 +17,31 @@ import UserContext from "./userContext";
  * Routes --> ProfileForm
  */
 
-function ProfileForm() {
+function ProfileForm({ handleUpdate }) {
   console.log("ProfileForm rendered");
 
-//   const { currentUser } = useContext(UserContext);
-
-//   const [formValues, setFormValues] = useState(() => { return { ...currentUser } }
-//   );
+  const { currentUser } = useContext(UserContext);
 
   const [formValues, setFormValues] = useState({
-      username: "username",
-      firstName: "First",
-      lastName: "Last",
-      email: "mail@mail.com"
+      username: currentUser.username,
+      firstname: currentUser.firstname,
+      lastname: currentUser.lastname,
+      email: currentUser.email,
+      location: currentUser.location || "",
+      hobbies: currentUser.hobbies || "",
+      interests: currentUser.interests || "",
+      friendradius: currentUser.friendradius || 0,
+      password: ""
   });
 
-//   function submitForm(evt) {
-//     evt.preventDefault();
-//     try {
-//       handleSave(formValues);
-//     } catch (err) {
-//       alert(err);
-//     }
-//   }
+  function submitForm(evt) {
+    evt.preventDefault();
+    try {
+      handleUpdate(formValues);
+    } catch (err) {
+      alert(err);
+    }
+  }
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -51,7 +53,7 @@ function ProfileForm() {
 
   return (
     <div>
-      <form>
+      <form onSubmit={submitForm}>
         <label htmlFor="username">Username:</label>
         <input
           id="username"
@@ -61,20 +63,20 @@ function ProfileForm() {
           disabled={true}
         />
         <br />
-        <label htmlFor="firstName">First:</label>
+        <label htmlFor="firstname">First:</label>
         <input
-          id="firstName"
-          name="firstName"
-          value={formValues.firstName}
+          id="firstname"
+          name="firstname"
+          value={formValues.firstname}
           onChange={handleChange}
           required
         />
         <br />
-        <label htmlFor="lastName">Last:</label>
+        <label htmlFor="lastname">Last:</label>
         <input
-          id="lastName"
-          name="lastName"
-          value={formValues.lastName}
+          id="lastname"
+          name="lastname"
+          value={formValues.lastname}
           onChange={handleChange}
           required
         />
@@ -88,6 +90,51 @@ function ProfileForm() {
           required
         />
         <br />
+        <label htmlFor="location">Location:</label>
+        <input
+          id="location"
+          name="location"
+          value={formValues.location}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <label htmlFor="hobbies">Hobbies:</label>
+        <input
+          id="hobbies"
+          name="hobbies"
+          value={formValues.hobbies}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <label htmlFor="interests">Interests:</label>
+        <input
+          id="interests"
+          name="interests"
+          value={formValues.interests}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <label htmlFor="friendradius">Friend Radius:</label>
+        <input
+          id="friendradius"
+          name="friendradius"
+          value={formValues.friendradius}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <br />
+        <label htmlFor="password">Password:</label>
+        <input
+          id="password"
+          name="password"
+          value={formValues.password}
+          onChange={handleChange}
+          required
+        />
         <button>Save Changes!</button>
       </form>
     </div>

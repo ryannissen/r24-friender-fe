@@ -20,14 +20,14 @@ import ProfileForm from './ProfileForm';
  * App -> Routes
  */
 
-function RoutesComp({handleSignup, handleLogin}) {
+function RoutesComp({handleSignup, handleLogin, handleUpdate}) {
     
     return (
         <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route exact path="/login" element={<LoginForm handleLogin={handleLogin}/>} />
             <Route exact path="/signup" element={<SignupForm handleSignup={handleSignup} />} />
-            <Route exact path="/profile" element={<ProfileForm />} />
+            <Route exact path="/profile" element={<ProfileForm handleUpdate={handleUpdate} />} />
             <Route path="*" element={<HomePage />} />
         </Routes>
     )

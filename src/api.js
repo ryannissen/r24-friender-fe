@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:5001";
-const BASE_URL="http://localhost:5000";
+const BASE_URL = "http://localhost:5001";
+//const BASE_URL="http://localhost:5000";
 
 /** API Class.
  *
@@ -30,6 +30,16 @@ class FrienderApi {
     static async loginUser(user) {
         try {
             const res = await axios.post(`${BASE_URL}/login`, user);
+            return res.data.user;
+        } catch (err) {
+            return err;
+        }
+    }
+
+    /** Calls backend to update user profile details */
+    static async updateUser(user) {
+        try {
+            const res = await axios.patch(`${BASE_URL}/profile`, user);
             return res.data.user;
         } catch (err) {
             return err;
