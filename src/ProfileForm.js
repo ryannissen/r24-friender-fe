@@ -4,13 +4,13 @@ import { useContext } from "react";
 import UserContext from "./userContext";
 
 /**
- * Profile Form, all fields editable except for username
+ * Profile Form, all fields editable except for username and password
  * 
  * state:
- * - control component for form;
+ * - formValues: control component for form;
  * 
  * props:
- * - handleSave: Fn passed from app to set user in
+ * - handleUpdate: Fn passed from app to update user in
  * localstorage and provide context.
  * 
  * Routes --> ProfileForm
@@ -40,9 +40,13 @@ function ProfileForm({ handleUpdate }) {
   }, [currentUser]);
 
 
+  /** Upon submit, creates new instance of FormData object and appends to
+   * that new object
+   * 
+   * Then calls parent function with that new FormData instance
+   */
   function submitForm(evt) {
     evt.preventDefault();
-    //Creating form with FormData object for BE. Needed for image.
     const multiFormData = new FormData();
     multiFormData.append("username", formValues.username);
     multiFormData.append("firstname", formValues.firstname);
@@ -54,11 +58,6 @@ function ProfileForm({ handleUpdate }) {
     multiFormData.append("friendradius", formValues.friendradius);
     multiFormData.append("password", formValues.password);
     multiFormData.append("image_url", formValues.image_url);
-
-    // console.log("BEFORE OUR FOR LOOP", multiFormData.get("username"))
-    // for (let data of multiFormData.entries()) {
-    //   console.log(data);
-    // }
     try {
       handleUpdate(multiFormData);
     } catch (err) {
@@ -66,6 +65,7 @@ function ProfileForm({ handleUpdate }) {
     }
   }
 
+  /** Updates state with form input value */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormValues(fData => ({
@@ -74,6 +74,7 @@ function ProfileForm({ handleUpdate }) {
     }));
   }
 
+  /** Updates state for file input */
   function handleImage(evt) {
     const {name} = evt.target;
     const value = evt.target.files[0];

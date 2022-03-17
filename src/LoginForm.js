@@ -1,13 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { useHistory } from 'react-router-dom'
-
 
 /**
  * Login Form Component
  * 
  * state:
- * - control component for form
+ * - formValues: control component for form
  * 
  * props:
  * - handleLogin: Fn passed from app to set a new token.
@@ -18,23 +16,22 @@ import { useHistory } from 'react-router-dom'
 function LoginForm({handleLogin}) {
   console.log("LoginForm rendered");
 
-  //const history = useHistory();
-
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
   });
 
+  /** Upon submit, calls parent function to login users */
   async function submitForm(evt) {
     evt.preventDefault();
     try {
       await handleLogin(formValues);
-      //history.push('/');
     } catch (err) {
       alert(err);
     }
   }
 
+  /** Updates state with form input value */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormValues(fData => ({

@@ -5,16 +5,13 @@ const BASE_URL="http://localhost:5000";
 
 /** API Class.
  *
- * Static class tying together methods used to get/send to to the API.
- * There shouldn't be any frontend-specific stuff here, and there shouldn't
- * be any API-aware stuff elsewhere in the frontend.
+ * - Holds static methods for:
+ *  - signupUser
+ *  - loginUser
+ *  - updateUser
  *
  */
-
 class FrienderApi {
-
-    //Look at refactoring to request function
-    //to reduce repeated axios calls
 
     /** Calls backend to signup new user */
     static async signupUser(user) {

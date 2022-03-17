@@ -6,18 +6,22 @@ import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import ProfileForm from './ProfileForm';
 
-/** Routes Component
+/** 
+ * Routes Component
  * 
- * State- none
+ * State: none
  * 
- * Props-
- * handleSignup: Fn to sign up a new user in app
- * passes to signup component
+ * Props: 
+ *  handleSignup: function to sign up a new user in app
+ *  passes to signup component
  * 
- * handleLogin: Fn to login an existing user in app
- * passes to login component
+ *  handleLogin: function to login an existing user in app
+ *  passes to login component
  * 
- * App -> Routes
+ *  handleUpdate: function to update an existing user in app
+ *  passes to profile component
+ * 
+ * App -> Routes {homepage, signup, login, profile}
  */
 
 function RoutesComp({handleSignup, handleLogin, handleUpdate}) {

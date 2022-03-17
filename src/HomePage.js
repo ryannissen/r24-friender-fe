@@ -4,6 +4,8 @@ import UserContext from "./userContext";
 
 /**
  * Home Page component for users
+ *  - Displays login prompt for users not logged in
+ *  - Displays welcome prompt for logged in users
  * 
  * Props: none
  * 
@@ -11,11 +13,10 @@ import UserContext from "./userContext";
  * 
  * Context: user
  * 
- * App -> HomePage
+ * App -> Routes -> HomePage
  */
 function HomePage() {
     const { currentUser } = useContext(UserContext);
-    console.log("HOMEPAGE CURRENTUSER", currentUser);
 
     return (
         <>

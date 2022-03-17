@@ -3,20 +3,20 @@ import { useState } from "react";
 import { useHistory } from 'react-router-dom';
 
 /**
+ * SignupForm component
  * 
  * state:
- * - control component for form;
+ * - formValues: control component for form
  * 
  * props:
  * - handleSignup: Fn passed from app to set user in
  * localstorage and provide context.
  * 
- * Routes --> SignForm
+ * Routes --> SignupForm
  */
 function SignupForm({handleSignup}) {
   console.log("SignupForm rendered");
 
-//   const history = useHistory();
 
   const [formValues, setFormValues] = useState({
     username: "",
@@ -26,16 +26,17 @@ function SignupForm({handleSignup}) {
     email: "",
   });
 
+  /** Upon submit, calls parent function to signup users */
   async function submitForm(evt) {
     evt.preventDefault();
     try {
       await handleSignup(formValues);
-      //history.push('/');
     } catch (err) {
       alert(err);
     }
   }
 
+  /** Updates state with form input value */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormValues(fData => ({
