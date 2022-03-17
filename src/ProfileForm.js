@@ -42,11 +42,18 @@ function ProfileForm({ handleUpdate }) {
 
   function submitForm(evt) {
     evt.preventDefault();
-    try {
-      handleUpdate(formValues);
-    } catch (err) {
-      alert(err);
+    const multiFormData = new FormData();
+    multiFormData.append("image_url", formValues.image_url);
+    multiFormData.append("username", formValues.username);
+    console.log("BEFORE OUR FOR LOOP", multiFormData.get("username"))
+    for (let data of multiFormData.entries()) {
+      console.log(data);
     }
+    // try {
+    //   handleUpdate(multiFormData);
+    // } catch (err) {
+    //   alert(err);
+    // }
   }
 
   function handleChange(evt) {
@@ -57,8 +64,13 @@ function ProfileForm({ handleUpdate }) {
     }));
   }
 
-  function imgUpload(){
-
+  function handleImage(evt) {
+    const {name} = evt.target;
+    const value = evt.target.files[0];
+    setFormValues(currData => ({
+      ...currData,
+      [name]: value,
+    }))
   }
 
   return (
@@ -150,18 +162,12 @@ function ProfileForm({ handleUpdate }) {
         <input
           id="image_url"
           name="image_url"
-          value={formValues.image_url}
-          onChange={handleChange}
+          onChange={handleImage}
+          type="file"
           required
         />
         <button>Save Changes!</button>
-        <br />
-        <br />
-        <br />
-        
       </form>
-      <input type="file" id="uploadprofileimg" />
-      <button id="uploadprofileimgbtn" onClick={imgUpload}>Image Upload</button>
     </div>
   )
 }
