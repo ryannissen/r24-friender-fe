@@ -1,6 +1,8 @@
 import React from "react";
 import { useContext } from "react";
 import UserContext from "./userContext";
+import CardList from "./CardList";
+import FrienderApi from './api';
 
 /**
  * Home Page component for users
@@ -18,11 +20,17 @@ import UserContext from "./userContext";
 function HomePage() {
     const { currentUser } = useContext(UserContext);
 
+    async function getAllUsers() {
+        const allUsers = await FrienderApi.getAllUsers();
+        return allUsers;
+      }
+
     return (
         <>
             {currentUser &&
                 <div>
                     <h1>Welcome to Friendler {currentUser.firstname}</h1>
+                    <CardList getAllUsers={getAllUsers} />
                 </div>
             }
             {!currentUser &&

@@ -35,7 +35,7 @@ function App() {
   // Sets current user state from local storage
   useEffect(function fetchUserOnFirstLoad() {
     console.log("WHATS IN LOCAL STORAGE", localStorage.getItem("user"))
-    if(localStorage.getItem("user")){
+    if (localStorage.getItem("user")) {
       setCurrentUser(JSON.parse(localStorage.getItem("user")));
     }
   }, []);
@@ -73,9 +73,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider value={{ currentUser }}>
-          <NavBar handleLogout={logoutUser}/>
-          <RoutesComp 
-            handleSignup={signupUser} 
+          <NavBar handleLogout={logoutUser} />
+          <RoutesComp
+            handleSignup={signupUser}
             handleLogin={loginUser}
             handleUpdate={updateUser} />
         </UserContext.Provider>

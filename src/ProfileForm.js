@@ -30,7 +30,7 @@ function ProfileForm({ handleUpdate }) {
       interests: "",
       friendradius: 0,
       password: "",
-      image_url: "",
+      image_url: "", //CR Maybe change name to image_file
   });
   
   useEffect(function setFormInfo() {
@@ -48,20 +48,26 @@ function ProfileForm({ handleUpdate }) {
   function submitForm(evt) {
     evt.preventDefault();
     const multiFormData = new FormData();
-    multiFormData.append("username", formValues.username);
-    multiFormData.append("firstname", formValues.firstname);
-    multiFormData.append("lastname", formValues.lastname);
-    multiFormData.append("email", formValues.email);
-    multiFormData.append("location", formValues.location);
-    multiFormData.append("hobbies", formValues.hobbies);
-    multiFormData.append("interests", formValues.interests);
-    multiFormData.append("friendradius", formValues.friendradius);
-    multiFormData.append("password", formValues.password);
-    multiFormData.append("image_url", formValues.image_url);
+    // multiFormData.append("username", formValues.username);
+    // multiFormData.append("firstname", formValues.firstname);
+    // multiFormData.append("lastname", formValues.lastname);
+    // multiFormData.append("email", formValues.email);
+    // multiFormData.append("location", formValues.location);
+    // multiFormData.append("hobbies", formValues.hobbies);
+    // multiFormData.append("interests", formValues.interests);
+    // multiFormData.append("friendradius", formValues.friendradius);
+    // multiFormData.append("password", formValues.password);
+    // multiFormData.append("image_url", formValues.image_url);
+    
+    for (let key in formValues){
+      multiFormData.append(key, formValues[key])
+    }
+
     try {
       handleUpdate(multiFormData);
     } catch (err) {
       alert(err);
+      //CR This error wont get caught because we are not awawiting
     }
   }
 

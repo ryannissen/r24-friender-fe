@@ -1,7 +1,5 @@
 import axios from "axios";
-
-//const BASE_URL = "http://localhost:5001"
-const BASE_URL="http://localhost:5000";
+import BASE_URL from './config'
 
 /** API Class.
  *
@@ -38,6 +36,15 @@ class FrienderApi {
         try {
             const res = await axios.patch(`${BASE_URL}/profile`, user);
             return res.data.user;
+        } catch (err) {
+            return err;
+        }
+    }
+
+    static async getAllUsers() {
+        try {
+            const res = await axios.get(`${BASE_URL}/cards`)
+            return res.data.users;
         } catch (err) {
             return err;
         }
