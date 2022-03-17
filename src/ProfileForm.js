@@ -42,18 +42,28 @@ function ProfileForm({ handleUpdate }) {
 
   function submitForm(evt) {
     evt.preventDefault();
+    //Creating form with FormData object for BE. Needed for image.
     const multiFormData = new FormData();
-    multiFormData.append("image_url", formValues.image_url);
     multiFormData.append("username", formValues.username);
-    console.log("BEFORE OUR FOR LOOP", multiFormData.get("username"))
-    for (let data of multiFormData.entries()) {
-      console.log(data);
-    }
-    // try {
-    //   handleUpdate(multiFormData);
-    // } catch (err) {
-    //   alert(err);
+    multiFormData.append("firstname", formValues.firstname);
+    multiFormData.append("lastname", formValues.lastname);
+    multiFormData.append("email", formValues.email);
+    multiFormData.append("location", formValues.location);
+    multiFormData.append("hobbies", formValues.hobbies);
+    multiFormData.append("interests", formValues.interests);
+    multiFormData.append("friendradius", formValues.friendradius);
+    multiFormData.append("password", formValues.password);
+    multiFormData.append("image_url", formValues.image_url);
+
+    // console.log("BEFORE OUR FOR LOOP", multiFormData.get("username"))
+    // for (let data of multiFormData.entries()) {
+    //   console.log(data);
     // }
+    try {
+      handleUpdate(multiFormData);
+    } catch (err) {
+      alert(err);
+    }
   }
 
   function handleChange(evt) {
