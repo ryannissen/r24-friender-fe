@@ -6,7 +6,7 @@ import FrienderApi from './api';
 import './CardList.css';
 
 
-function CardList({ getAllUsers }) {
+function CardList({ getAllUsers, getAllLikes, getAllDislikes }) {
 
     const [listOfCards, setListOfCards] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +17,12 @@ function CardList({ getAllUsers }) {
     useEffect(function fetchAllusersOnFirstLoad() {
         async function fetchAllUsers() {
             const users = await getAllUsers();
+            const usersLiked = await getAllLikes();
+            const usersDisliked = await getAllDislikes();
             const filteredUsers = users.filter(user => currentUser.username !== user.username);
+            //some logic with teh above 3 vars
+            console.log('users liked', usersLiked);
+            console.log('users disliked', usersDisliked);
             console.log("LIST FILTERED", filteredUsers);
             setListOfCards(filteredUsers);
             setIsLoading(false);

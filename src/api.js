@@ -43,7 +43,7 @@ class FrienderApi {
 
     static async getAllUsers() {
         try {
-            const res = await axios.get(`${BASE_URL}/cards`)
+            const res = await axios.get(`${BASE_URL}/cards`);
             return res.data.users;
         } catch (err) {
             return err;
@@ -52,7 +52,7 @@ class FrienderApi {
 
     static async likeUser(user) {
         try {
-            const res = await axios.post(`${BASE_URL}/like`, user)
+            const res = await axios.post(`${BASE_URL}/like`, user);
         } catch (err) {
             return err;
         }
@@ -60,12 +60,29 @@ class FrienderApi {
 
     static async dislikeUser(user) {
         try {
-            const res = await axios.post(`${BASE_URL}/dislike`, user)
+            const res = await axios.post(`${BASE_URL}/dislike`, user);
         } catch (err) {
             return err;
         }
     }
 
+    static async getAllLikesForCurrentUser(user) {
+        try {
+            const res = await axios.get(`${BASE_URL}/alllikes/${user}`);
+            return res.data;
+        } catch (err) {
+            return err;
+        }
+    }
+
+    static async getAllDislikesForCurrentUser(user) {
+        try {
+            const res = await axios.get(`${BASE_URL}/alldislikes/${user}`, user);
+            return res.data;
+        } catch (err) {
+            return err;
+        }
+    }
 }
 
 export default FrienderApi;

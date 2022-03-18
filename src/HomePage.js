@@ -23,14 +23,26 @@ function HomePage() {
     async function getAllUsers() {
         const allUsers = await FrienderApi.getAllUsers();
         return allUsers;
-      }
+    }
+
+    async function getAllLikesForCurrentUser() {
+        const allLikesForCurrentUser = await FrienderApi.getAllLikesForCurrentUser(currentUser.username);
+        return allLikesForCurrentUser;
+    }
+
+    async function getAllDislikesForCurrentUser() {
+        const allDislikesForCurrentUser = await FrienderApi.getAllDislikesForCurrentUser(currentUser.username);
+        return allDislikesForCurrentUser;
+    }
 
     return (
         <>
             {currentUser &&
                 <div>
                     <h1>Welcome to Friendler {currentUser.firstname}</h1>
-                    <CardList getAllUsers={getAllUsers} />
+                    <CardList getAllUsers={getAllUsers}
+                        getAllLikes={getAllLikesForCurrentUser}
+                        getAllDislikes={getAllDislikesForCurrentUser} />
                 </div>
             }
             {!currentUser &&
