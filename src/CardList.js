@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import FrienderApi from './api';
 import Card from "./Card";
+import { useContext } from "react";
+import UserContext from "./userContext";
+
 
 function CardList({ getAllUsers }) {
 
@@ -8,10 +10,14 @@ function CardList({ getAllUsers }) {
     const [isLoading, setIsLoading] = useState(true);
     const [currentCard, setCurrentCard] = useState(0);
 
+    const { currentUser } = useContext(UserContext);
+
     useEffect(function fetchAllusersOnFirstLoad() {
         async function fetchAllUsers() {
             const users = await getAllUsers();
-            setListOfCards(users);
+            const filteredUsers = users.filter(user => currentUser.username !== user.username);
+            console.log("LIST FILTERED", filteredUsers);
+            setListOfCards(filteredUsers);
             setIsLoading(false);
         }
         fetchAllUsers();
@@ -24,9 +30,13 @@ function CardList({ getAllUsers }) {
         }
     }, [listOfCards])
 
-    function onLikeDislike() {
+    function onDislike() {
         //this is on click of liking or dislinking
-        setCurrentCard()
+        setCurrentCard(currentCard - 1);
+    }
+
+    function onLike(){
+        setCurrentCard(currentCard - 1);
     }
 
     if (isLoading) return <h1>Loading FRIENDS!!!</h1>
@@ -39,8 +49,8 @@ function CardList({ getAllUsers }) {
             <p>Shows one card at a time from list</p>
             {showCard && <Card friend={listOfCards[currentCard]} />}
             <span>
-                <button>Dislike</button>
-                <button>Like</button>
+                <button onClick={onDislike}>Dislike</button>
+                <button onClick={onLike}>Like</button>
             </span>
         </div>
     )

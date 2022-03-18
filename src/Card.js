@@ -4,7 +4,9 @@ function Card({ friend }) {
     return (
         <div>
             <h4>This is a card object</h4>
-            <p>{friend.firstname}</p>
+            <img src={friend.image_url} alt="This is a profile"></img>
+            <p>Hey my name is {friend.firstname} {friend.lastname}</p>
+            <p>I'm from {friend.location}</p>
         </div>
     )
 
