@@ -3,6 +3,7 @@ import Card from "./Card";
 import { useContext } from "react";
 import UserContext from "./userContext";
 import FrienderApi from './api';
+import './CardList.css';
 
 
 function CardList({ getAllUsers }) {
@@ -55,12 +56,11 @@ function CardList({ getAllUsers }) {
 
     return (
         <div>
-            <h2>Cardlist</h2>
-            <p>Shows one card at a time from list</p>
+            <h2>Like or Dislike</h2>
             {showCard && <Card friend={listOfCards[currentCard]} />}
             <span>
-                <button onClick={onDislike}>Dislike</button>
-                <button onClick={onLike}>Like</button>
+                <button className="CardList-dislike" onClick={onDislike}>Dislike</button>
+                <button className="CardList-like" onClick={onLike}>Like</button>
             </span>
         </div>
     )

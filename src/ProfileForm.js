@@ -92,6 +92,7 @@ function ProfileForm({ handleUpdate }) {
 
   return (
     <div>
+      <h1>Update your profile {currentUser.firstname}</h1>
       <img src={currentUser?.image_url} alt="proflie"></img>
       <form onSubmit={submitForm}>
         <label htmlFor="username">Username:</label>

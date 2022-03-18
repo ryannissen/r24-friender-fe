@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "./userContext";
+import './NavBar.css';
 
 /**
  * NavBar component for users to navigate through the application

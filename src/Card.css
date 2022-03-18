@@ -1,0 +1,12 @@
+.Card {
+    border-style: solid;
+    border-color: black;
+    width: 50em;
+    margin: auto;
+    border-radius: 40%;
+}
+
+img {
+    width: 250px;
+    height: 250px;
+}
