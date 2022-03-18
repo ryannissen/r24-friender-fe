@@ -26,6 +26,16 @@ import ProfileForm from './ProfileForm';
 
 function RoutesComp({handleSignup, handleLogin, handleUpdate}) {
     
+    const { currentUser } = useContext(UserContext);
+
+    // let showCards = true;
+
+    // for (let prop in currentUser) {
+    //     if (currentUser[prop] === null || currentUser[prop] === ""){
+    //         showCards = false;
+    //     }
+    // }
+
     return (
         <Routes>
             <Route exact path="/" element={<HomePage />} />

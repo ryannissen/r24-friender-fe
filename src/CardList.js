@@ -19,21 +19,26 @@ function CardList({ getAllUsers, getAllLikes, getAllDislikes }) {
             const users = await getAllUsers();
             const usersLiked = await getAllLikes();
             const usersDisliked = await getAllDislikes();
+
+            const usersLikedByUser = usersLiked.map(userbeingliked =>
+                userbeingliked["user_being_liked"]);
+            const usersDisLikedByUser = usersDisliked.map(userbeingdisliked =>
+                userbeingdisliked["user_being_disliked"]);
+            const likedAndDislikedUsers = usersLikedByUser.concat(usersDisLikedByUser);
+
             const filteredUsers = users.filter(user => currentUser.username !== user.username);
-            //some logic with teh above 3 vars
-            console.log('users liked', usersLiked);
-            console.log('users disliked', usersDisliked);
-            console.log("LIST FILTERED", filteredUsers);
-            setListOfCards(filteredUsers);
+            const usersBeingShown = filteredUsers.filter(user =>
+                !(likedAndDislikedUsers.includes(user.username)));
+
+            setListOfCards(usersBeingShown);
             setIsLoading(false);
         }
         fetchAllUsers();
-    }, [])
+    }, [currentCard])
 
     useEffect(function pickFirstCardOnLoad() {
         if (listOfCards.length > 0) {
             setCurrentCard(listOfCards.length - 1);
-            console.log("Current Card set");
         }
     }, [listOfCards])
 
@@ -62,11 +67,18 @@ function CardList({ getAllUsers, getAllLikes, getAllDislikes }) {
     return (
         <div>
             <h2>Like or Dislike</h2>
-            {showCard && <Card friend={listOfCards[currentCard]} />}
-            <span>
-                <button className="CardList-dislike" onClick={onDislike}>Dislike</button>
-                <button className="CardList-like" onClick={onLike}>Like</button>
-            </span>
+            {showCard ?
+                <div>
+                    <Card friend={listOfCards[currentCard]} />
+                    <span>
+                        <button className="CardList-dislike" onClick={onDislike}>Dislike</button>
+                        <button className="CardList-like" onClick={onLike}>Like</button>
+                    </span>
+                </div>
+                :
+                <p>Sorry, you don't have any more friends!</p>
+            }
+
         </div>
     )
 }

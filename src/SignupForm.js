@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate, Navigate, Routes, Route } from "react-router-dom"
+
 
 /**
  * SignupForm component
@@ -17,6 +17,8 @@ import { useHistory } from 'react-router-dom';
 function SignupForm({handleSignup}) {
   console.log("SignupForm rendered");
 
+  const navigate = useNavigate();
+
 
   const [formValues, setFormValues] = useState({
     username: "",
@@ -31,7 +33,8 @@ function SignupForm({handleSignup}) {
     evt.preventDefault();
     try {
       await handleSignup(formValues);
-    } catch (err) {
+      navigate("/profile")
+     } catch (err) {
       alert(err);
     }
   }

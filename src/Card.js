@@ -1,7 +1,6 @@
 import './Card.css';
 
 function Card({ friend }) {
-    console.log("friend", friend);
     return (
         <div className="Card">
             <h4>{friend.firstname} {friend.lastname}</h4>

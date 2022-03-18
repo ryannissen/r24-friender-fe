@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate, Navigate, Routes, Route } from "react-router-dom";
 
 /**
  * Login Form Component
@@ -16,6 +16,8 @@ import { useState } from "react";
 function LoginForm({handleLogin}) {
   console.log("LoginForm rendered");
 
+  const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
@@ -26,6 +28,7 @@ function LoginForm({handleLogin}) {
     evt.preventDefault();
     try {
       await handleLogin(formValues);
+      navigate("/profile")
     } catch (err) {
       alert(err);
     }

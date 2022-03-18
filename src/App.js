@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Navigate } from "react-router-dom";
 import NavBar from './NavBar';
 import RoutesComp from './RoutesComp';
 import FrienderApi from './api';
