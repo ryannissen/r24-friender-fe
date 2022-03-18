@@ -50,6 +50,22 @@ class FrienderApi {
         }
     }
 
+    static async likeUser(user) {
+        try {
+            const res = await axios.post(`${BASE_URL}/like`, user)
+        } catch (err) {
+            return err;
+        }
+    }
+
+    static async dislikeUser(user) {
+        try {
+            const res = await axios.post(`${BASE_URL}/dislike`, user)
+        } catch (err) {
+            return err;
+        }
+    }
+
 }
 
 export default FrienderApi;

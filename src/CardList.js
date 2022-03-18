@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from "./Card";
 import { useContext } from "react";
 import UserContext from "./userContext";
+import FrienderApi from './api';
 
 
 function CardList({ getAllUsers }) {
@@ -30,19 +31,28 @@ function CardList({ getAllUsers }) {
         }
     }, [listOfCards])
 
-    function onDislike() {
-        //this is on click of liking or dislinking
+    async function onDislike() {
+        const user = {
+            user_swiping: currentUser.username,
+            user_being_disliked: listOfCards[currentCard].username
+        }
+        await FrienderApi.dislikeUser(user);
         setCurrentCard(currentCard - 1);
     }
 
-    function onLike(){
+    async function onLike() {
+        const user = {
+            user_swiping: currentUser.username,
+            user_being_liked: listOfCards[currentCard].username
+        }
+        await FrienderApi.likeUser(user);
         setCurrentCard(currentCard - 1);
     }
 
     if (isLoading) return <h1>Loading FRIENDS!!!</h1>
 
     const showCard = listOfCards.length > 0;
-    
+
     return (
         <div>
             <h2>Cardlist</h2>
